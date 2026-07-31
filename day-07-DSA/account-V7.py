@@ -282,14 +282,13 @@ class BankConfig:
         return self.config.get(account_type, {})
 
 class AccountRegistry:
-    def __init__(self):
-        self.accounts = {}
+    __accounts = {}
     
     def register_account(self, account):
-        self.accounts[account.account_number] = account
+        AccountRegistry.__accounts[account.account_number] = account
     
     def get_account(self, account_number):
-        return self.accounts.get(account_number)
+        return AccountRegistry.__accounts.get(account_number)
 
 class AccountHistory:
     def __init__(self):
