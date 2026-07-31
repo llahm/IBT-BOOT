@@ -1,15 +1,17 @@
+
 from django.utils import json
 from abc import abstractmethod, ABC
 from datetime import date, datetime, timedelta
 
 class Account(ABC):
+    
+    __subscribed = []
     def __init__(self, owner, number):
         self.owner = owner
         self.account_number = number
         self.__balance = 0
         self.__dateOfCreation = datetime.now().date()
         self.__withdrawal_limit = 0  # Default withdrawal limit for all accounts
-        self.subscribed = []  # List of subscribed observers for logging and alerts
         self.__phone_number = None  # Placeholder for phone number, can be set later
     
     @property
@@ -41,10 +43,13 @@ class Account(ABC):
     def calculateTimeDuration(self):
         return (datetime.now() - self.__dateOfCreation)
     
-    def observe(self, class_instance):
-        self.subscribed.append(class_instance)
-    
+    @staticmethod
+    def observe(class_instance):
+        if class_instance is not None:
+            Account.__subscribed.append(class_instance)
+
     # Notify subscribed observers about an event
+    @staticmethod
     def notify(self, event):
         if self.subscribed:
             for observer in self.subscribed:
@@ -181,12 +186,13 @@ class CertificatesOfDeposit(Account):
 # down are other utility classes for logging and sending SMS alerts
 # use observer pattern to log the transactions and send SMS alerts
 class AuditLog:
-    __init__ = None
-    transaction_history = None
+    def __init__(self):
+        self.log_file = "log.txt"
+        Account.observe(AuditLog)  # Subscribe to account events for logging
     
     def log(self, message):
         try:
-            with open("log.txt", "a") as file:
+            with open(self.log_file, "a") as file:
                 file.write(f"{datetime.now()}: {message}\n")
         except Exception as e:
             print(f"Failed to log transaction: {e}")
@@ -274,3 +280,28 @@ class BankConfig:
 
     def get_account_config(self, account_type):
         return self.config.get(account_type, {})
+
+class AccountRegistry:
+    def __init__(self):
+        self.accounts = {}
+    
+    def register_account(self, account):
+        self.accounts[account.account_number] = account
+    
+    def get_account(self, account_number):
+        return self.accounts.get(account_number)
+
+class AccountHistory:
+    def __init__(self):
+        self.history = {}
+        
+    
+    def record_transaction(self, account_number, transaction):
+        if account_number not in self.history:
+            self.history[account_number] = []
+        self.history[account_number].append(transaction)
+    
+    def get_history(self, account_number):
+        return self.history.get(account_number, [])
+
+
