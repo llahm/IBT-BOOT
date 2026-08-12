@@ -1,0 +1,28 @@
+.heading {
+    display: flex;
+    color: white;
+    background-color: rgb(104, 104, 4);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1, h3 {
+    padding: 1rem;
+    margin: 0.5rem;
+}
+
+.item-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.item1, .item2, .item3, .item4, .item5, .item6, .item7, .item8, .item9, .item10 {
+    background-color: green;
+    color: white;
+    font: monospace 1rem ;
+    padding: 1rem;
+    margin: 0.5rem;
+    text-align: center;
+}

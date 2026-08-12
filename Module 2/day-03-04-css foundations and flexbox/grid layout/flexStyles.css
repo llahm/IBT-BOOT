@@ -1,0 +1,51 @@
+
+h1 {
+    color: #333;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.navbar {
+    background-color: yellow;
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    flex-shrink: initial;
+    
+}
+
+.item-one {
+    background-color: rgb(58, 6, 6);
+    color: white;
+    padding: 1rem;
+    margin: 0.5rem;
+}
+
+.item-two {
+    background-color: green;
+    color: white;
+    padding: 1rem;
+    margin: 0.5rem;
+}
+
+.item-three {
+    background-color: green;
+    color: white;
+    padding: 1rem;
+    margin: 0.5rem;
+}
+
+.item-four, .item-five, .item-six, .item-seven {
+    color: white;
+    background-color: green;
+    padding: 1rem;
+    margin: 0.5rem;
+}
+
+.item-seven {
+    background-color: blue;
+}
+

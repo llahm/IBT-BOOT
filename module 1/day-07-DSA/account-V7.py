@@ -2,7 +2,8 @@
 from django.utils import json
 from abc import abstractmethod, ABC
 from datetime import date, datetime, timedelta
-
+from collections import deque, stack
+ 
 class Account(ABC):
     
     __subscribed = []
@@ -18,12 +19,20 @@ class Account(ABC):
     def balance(self):
         return self.__balance
     
+    @property
+    def subscribed(self):
+        return self.__subscribed
+
     def subscribe(self, observer):
-        self.subscribed.append(observer)
-    
+        self.__subscribed.append(observer)
+
     @balance.setter
     def balance(self, value):
         self.__balance = value
+        
+    @abstractmethod
+    def transfer(self, amount, target_account):
+        pass
 
     @abstractmethod
     def deposit(self, amount):
@@ -43,8 +52,7 @@ class Account(ABC):
     def calculateTimeDuration(self):
         return (datetime.now() - self.__dateOfCreation)
     
-    @staticmethod
-    def observe(class_instance):
+    def observe(self, class_instance):
         if class_instance is not None:
             Account.__subscribed.append(class_instance)
 
@@ -52,22 +60,26 @@ class Account(ABC):
     @staticmethod
     def notify(self, event):
         if self.subscribed:
-            for observer in self.subscribed:
-                observer.observe(event)
-           
-class savingAccount(Account):
+            try:
+                for observer in self.subscribed:
+                    observer.observe(event)
+            except Exception as e:
+                print(f"Error occurred while notifying observer: {e}")
+
+class SavingAccount(Account):
     def __init__(self, owner, number):
         super().__init__(owner, number)
         self.__interest_rate = 0.02  # 2% interest rate
         self.__num_withdrawals = {"withdrawCount": 0, "validSince": self.__dateOfCreation + timedelta(days=30)}  # Number of withdrawals made in the current month
         self.__withdrawal_limit = 5  # Limit of 5 withdrawals per month
+        self.__pending_transactions = deque()  # Deque to hold pending transactions
     
     def deposit(self, amount):
         if amount > 0:
             self.__balance = self.calculateBalance(self.__interest_rate) + amount
             self.notify({ "name": self.owner, "account": self.account_number, "event": "deposit", "amount": amount, "balance": self.balance, "phone_number": self.__phone_number })
         else:
-            print("Deposit amount must be greater than zero.")
+            print(f"Deposit amount:({amount}) must be greater than zero.")
     
     def withdraw(self, amount):
         self.updateNumWithdrawals()
@@ -76,10 +88,28 @@ class savingAccount(Account):
             self.__num_withdrawals["withdrawCount"] += 1
             self.notify({ "name": self.owner, "account": self.account_number, "event": "withdrawal", "amount": amount, "balance": self.balance, "phone_number": self.__phone_number })
         else:
-            print('''Withdrawal amount must be:
+            print(f'''Withdrawal amount:({amount}) must be:
                 \n1. greater than zero 
                 \n2. less than or equal to the current balance, and 
                 \n3. within the monthly withdrawal limit.''')
+    
+    # transfer method to transfer money from one account to another and implemented it as a queue
+    # to maintain the order of transactions and to ensure that the transactions are processed in the order they were made
+    def transfer(self, amount, target_account):
+        try:
+            if amount > 0 and amount <= self.__balance:
+                self.__balance -= amount
+                target_account.__balance += amount
+                event = { "name": self.owner, "account": self.account_number, "event": "transfer_out", "amount": amount, "balance": self.balance, "phone_number": self.__phone_number }
+                self.notify(event)
+                target_account.notify(event)
+            else:
+                print(f'''Transfer amount:({amount}) must be:
+                    \n1. greater than zero 
+                    \n2. less than or equal to the current balance.''')
+        except Exception as e:
+            print(f"Error occurred during transfer: {e}, currently we could not confirm the transfer, but well try to process it later.")
+            self.__pending_transactions.append((amount, target_account))
     
     def updateNumWithdrawals(self):
         current_date = datetime.now().date()
@@ -93,8 +123,8 @@ class savingAccount(Account):
         print(f"Balance: {self.balance} units")
         print(f"Date of Creation: {self.__dateOfCreation}")
         print(f"Number of Withdrawals this Month: {self.__num_withdrawals['withdrawCount']}")
-    
-class checkingAccount(Account):
+
+class CheckingAccount(Account):
     def __init__(self, owner, number):
         super().__init__(owner, number)
         self.__overdraft_limit = 500  # Overdraft limit of 500 units
@@ -105,14 +135,14 @@ class checkingAccount(Account):
             self.__balance = self.calculateBalance(self.__interest_rate) + amount
             self.notify({ "name": self.owner, "account": self.account_number, "event": "deposit", "amount": amount, "balance": self.balance, "phone_number": self.__phone_number })
         else:
-            print("Deposit amount must be greater than zero.")
+            print(f"Deposit amount:({amount}) must be greater than zero.")
 
     def withdraw(self, amount):
         if amount > 0 and amount <= self.__balance + self.__overdraft_limit:
             self.__balance -= amount
             self.notify({ "name": self.owner, "account": self.account_number, "event": "withdrawal", "amount": amount, "balance": self.balance, "phone_number": self.__phone_number })
         else:
-            print('''Withdrawal amount must be: 
+            print(f'''Withdrawal amount:({amount}) must be: 
                 \n1. greater than zero 
                 \n2. less than or equal to the current balance plus the overdraft limit.''')
     
@@ -122,7 +152,7 @@ class checkingAccount(Account):
         print(f"Balance: {self.balance} units")
         print(f"Date of Creation: {self.__dateOfCreation}")
         print(f"Overdraft Limit: {self.__overdraft_limit} units")
-    
+
 class MoneyMarketAccounts(Account):
     def __init__(self, owner, number):
         super().__init__(owner, number)
@@ -135,18 +165,31 @@ class MoneyMarketAccounts(Account):
             self.__balance = self.calculateBalance(self.__interest_rate) + amount
             self.notify({ "name": self.owner, "account": self.account_number, "event": "deposit", "amount": amount, "balance": self.balance, "phone_number": self.__phone_number })
         else:
-            print("Deposit amount must be greater than zero.")
+            print(f"Deposit amount:({amount}) must be greater than zero.")
     
     def withdraw(self, amount):
         if amount > 0 and amount <= self.__balance and self.__balance - amount >= self.__minimum_balance:
             self.__balance -= amount
             self.notify({ "name": self.owner, "account": self.account_number, "event": "withdrawal", "amount": amount, "balance": self.balance, "phone_number": self.__phone_number })
         else:
-            print('''Withdrawal amount must be: 
+            print(f'''Withdrawal amount:({amount}) must be: 
                 \n1. greater than zero 
                 \n2. less than or equal to the current balance, and 
                 \n3. must not cause the balance to fall below the minimum balance.''')
 
+    def transfer(self, amount, target_account):
+        if amount > 0 and amount <= self.__balance and self.__balance - amount >= self.__minimum_balance:
+            self.__balance -= amount
+            target_account.__balance += amount
+            event = { "name": self.owner, "account": self.account_number, "event": "transfer_out", "amount": amount, "balance": self.balance, "phone_number": self.__phone_number }
+            self.notify(event)
+            target_account.notify(event)
+        else:
+            print(f'''Transfer amount:({amount}) must be: 
+                \n1. greater than zero 
+                \n2. less than or equal to the current balance, and 
+                \n3. must not cause the balance to fall below the minimum balance.''')
+    
     def statement(self):
         print(f"Account Statement for {self.owner}:")
         print(f"Account Number: {self.account_number}")
@@ -290,17 +333,18 @@ class AccountRegistry:
     def get_account(self, account_number):
         return AccountRegistry.__accounts.get(account_number)
 
-class AccountHistory:
-    def __init__(self):
-        self.history = {}
-        
+#implemented the history repository class to store the history of transactions for each account
+#and each account can have multiple transactions and the history is stored in a stack data structure to maintain the order of transactions
+class AccountHistoryRepo:
+    history_stack = {}
     
     def record_transaction(self, account_number, transaction):
-        if account_number not in self.history:
-            self.history[account_number] = []
-        self.history[account_number].append(transaction)
+        if account_number not in self.history_stack:
+            self.history_stack[account_number] = []
+        self.history_stack[account_number].insert(0, transaction)  #INSERT AT THE START OF THE LIST TO MAINTAIN LIFO ORDER
     
     def get_history(self, account_number):
-        return self.history.get(account_number, [])
+        return self.history_stack.get(account_number, [])
+
 
 
