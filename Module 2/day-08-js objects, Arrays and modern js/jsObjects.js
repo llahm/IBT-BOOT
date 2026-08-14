@@ -8,8 +8,8 @@ const products = [
 
 
 let productNames = products.map( obj => {
-    return obj.name
-}
+        return obj.name
+    }
 )
 
 for( let product of productNames)
@@ -30,4 +30,5 @@ let reducedPrice = products.reduce((accumulator, currentValue) => {
 }, 0)
 
 console.log("Total Price:", reducedPrice)
+
 
