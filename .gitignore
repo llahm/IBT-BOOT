@@ -36,5 +36,7 @@ yarn-error.log*
 next-env.d.ts
 
 day-06 javascript foundations/
-day-09-DOM-manipulation/
+
+day-09-dom-manipulation/
+
 day-10-javascript-async/
