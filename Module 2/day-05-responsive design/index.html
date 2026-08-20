@@ -5,31 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="responsive, mobile first website">
     <meta name="keywords" content="responsive, mobile first, website">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta http-equiv="Content-Language" content="en">
     <title>Responsive Design</title>
-    <link rel="icon" href="./habesha-eatery-1786489811796/habesha-eatery-logo.png" type="image/png">
-    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="./logo/logo.png" type="image/png">
+    <link rel="stylesheet" href="./style.css">
 
 </head>
 <body>
     <header>
         <nav>
             <ul>
-                <li><a href="#">Home</a></li> Hello Hello World Hello World
+                <li><a href="#">Home</a></li>
                 <li><a href="#">dishes</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
         </nav>
-        <h1>Responsive Design</h1>
     </header>
     <main>
-        <p>This is a responsive design example.</p>
+        <div class="main-content">
+            <h1>Welcome to the habesha Eatery order page</h1>
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <label for="dish">Select a dish:</label>
+                <select id="dish" name="dish" required>
+                    <option value="">--Please choose an option--</option>
+                    <option value="injera">Injera</option>
+                    <option value="doro-wat">Doro Wet</option>
+                    <option value="kitfo">Kitfo</option>
+                    <option value="shiro">Shiro</option>
+                </select>
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" min="1" max="10" value="1" required>
+                <label for="special-instructions">Special Instructions:</label>
+                <textarea id="special-instructions" name="special-instructions" rows="4"></textarea>
+                <button type="submit">Place Order</button>
+            </form>
+        </div>
     </main>
     <footer>
-        <p>&copy; 2023 Responsive Design. All rights reserved.</p>
+        <p>&copy; 2026 Responsive Design. All rights reserved.</p>
     </footer>
 </body>
 

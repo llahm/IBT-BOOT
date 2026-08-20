@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="An interactive Addis Market shopping list application"
+    >
+
+    <title>Addis Market Shopping List</title>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <header>
+        <h1>Addis Market</h1>
+        <p>Your interactive ETB shopping list</p>
+    </header>
+
+
+    <main>
+
+        <section class="shopping-app">
+
+            <h2>Add a New Item</h2>
+
+            <form id="add-form">
+
+                <div class="form-group">
+                    <label for="name">Item Name</label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Example: Teff"
+                    >
+                </div>
+
+
+                <div class="form-group">
+                    <label for="price">Price (ETB)</label>
+
+                    <input
+                        type="number"
+                        id="price"
+                        placeholder="Example: 250"
+                        min="0"
+                        step="0.01"
+                    >
+                </div>
+
+
+                <button type="submit">Add Item</button>
+
+            </form>
+
+
+            <div class="total-box">
+                <h2>
+                    Total:
+                    <span id="total">0.00</span> ETB
+                </h2>
+            </div>
+
+
+            <section>
+
+                <h2>My Shopping List</h2>
+
+                <ul id="list"></ul>
+
+            </section>
+
+        </section>
+
+    </main>
+
+
+    <script src="app.js"></script>
+</body>
+</html>

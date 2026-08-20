@@ -1,0 +1,144 @@
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f4f4f4;
+    color: #222;
+}
+
+
+header {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #222;
+    color: white;
+}
+
+header h1 {
+    margin-bottom: 10px;
+}
+
+
+main {
+    max-width: 700px;
+    width: 90%;
+    margin: 30px auto;
+}
+
+
+.shopping-app {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+h2 {
+    margin-bottom: 15px;
+}
+
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 10px 16px;
+
+    border: none;
+    border-radius: 5px;
+
+    background-color: #333;
+    color: white;
+
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+
+.total-box {
+    margin: 25px 0;
+    padding: 15px;
+
+    background-color: #eeeeee;
+    border-radius: 5px;
+}
+
+
+#list {
+    list-style: none;
+}
+
+#list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 15px;
+    margin-bottom: 10px;
+
+    background-color: #f7f7f7;
+    border-left: 4px solid #333;
+
+    cursor: pointer;
+}
+
+.item-info {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+
+#list li.bought {
+    text-decoration: line-through;
+    opacity: 0.5;
+}
+
+
+.del {
+    background-color: #c62828;
+}
+
+@media (max-width: 500px) {
+
+    .shopping-app {
+        padding: 20px;
+    }
+
+    #list li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .del {
+        width: 100%;
+    }
+}

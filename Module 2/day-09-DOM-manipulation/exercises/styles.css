@@ -1,0 +1,52 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+h1,
+h2 {
+    margin-bottom: 15px;
+}
+
+section {
+    margin-bottom: 30px;
+}
+
+button {
+    padding: 8px 14px;
+    cursor: pointer;
+}
+
+input {
+    padding: 8px;
+}
+
+hr {
+    margin: 30px 0;
+}
+
+
+.highlight {
+    color: crimson;
+    background-color: #ffe6e6;
+}
+
+#button-wrapper {
+    padding: 30px;
+    border: 2px solid black;
+}
+
+#delete-list li {
+    margin: 10px 0;
+}
+
+#item-list li {
+    margin: 10px 0;
+}

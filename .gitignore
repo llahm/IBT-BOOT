@@ -37,6 +37,11 @@ next-env.d.ts
 
 day-06 javascript foundations/
 
-day-09-dom-manipulation/
-
 day-10-javascript-async/
+
+test.js
+test2.js
+
+test/
+
+./day-05-responsive design/styles.css
