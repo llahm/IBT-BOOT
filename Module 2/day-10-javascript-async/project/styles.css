@@ -1,0 +1,111 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f4f4;
+    color: #222;
+}
+
+header {
+    padding: 40px 20px;
+    text-align: center;
+    background: #222;
+    color: white;
+}
+
+header h1 {
+    margin-bottom: 10px;
+}
+
+main {
+    width: min(90%, 700px);
+    margin: 40px auto;
+}
+
+#search-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+#country-input {
+    flex: 1;
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    background: #333;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+#facts {
+    background: white;
+    min-height: 150px;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.loading,
+.error {
+    text-align: center;
+    font-size: 18px;
+}
+
+.error {
+    color: crimson;
+}
+
+.country-card {
+    display: grid;
+    gap: 15px;
+}
+
+.flag {
+    width: 200px;
+    max-width: 100%;
+    border: 1px solid #ddd;
+}
+
+.country-name {
+    font-size: 28px;
+}
+
+.fact {
+    display: flex;
+    gap: 10px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.fact-label {
+    font-weight: bold;
+    min-width: 110px;
+}
+
+@media (max-width: 500px) {
+    #search-form {
+        flex-direction: column;
+    }
+
+    .fact {
+        flex-direction: column;
+        gap: 3px;
+    }
+}
