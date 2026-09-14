@@ -3,21 +3,10 @@ import "./App.css";
 
 import Header from "./Components/Header";
 import Hero from "./Components/Hero";
-import CategoryFilter from "./Components/CategoryFilter";
+import Menu from "./Components/Menu";
 import RestaurantCard from "./Components/RestaurantCard";
-import Dish from "./Components/Dish";
 import Cart from "./Components/Cart";
 import Footer from "./Components/Footer";
-
-const CATEGORIES = [
-  "All",
-  "Ethiopian",
-  "Pizza",
-  "Burger",
-  "Chicken",
-  "Coffee",
-  "Drinks",
-];
 
 async function getDishes() {
   const res = await fetch("/dishList.json");
@@ -32,7 +21,6 @@ function App() {
   const restaurants = [];
 
   const [dishes, setDishes] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("All");
 
   useEffect(() => {
     getDishes()
@@ -40,23 +28,12 @@ function App() {
       .catch((err) => console.error(err));
   }, []);
 
-  const filteredDishes =
-    selectedCategory === "All"
-      ? dishes
-      : dishes.filter((dish) => dish.category === selectedCategory);
-
   return (
     <div className="app">
       <Header />
 
       <main>
         <Hero />
-
-        <CategoryFilter
-          categories={CATEGORIES}
-          selected={selectedCategory}
-          onSelect={setSelectedCategory}
-        />
 
         <section
           className="restaurants-section"
@@ -94,45 +71,7 @@ function App() {
           </div>
         </section>
 
-        <section className="food-section">
-          <div className="container">
-            <div className="section-heading">
-              <div>
-                <span className="section-label">
-                  POPULAR
-                </span>
-
-                <h2>
-                  Popular dishes
-                </h2>
-              </div>
-
-              <button className="view-all">
-                View all →
-              </button>
-            </div>
-
-            <div className="food-grid">
-              {filteredDishes.length === 0 ? (
-                <p className="empty-state">
-                  No {selectedCategory} dishes yet — check back soon!
-                </p>
-              ) : (
-                filteredDishes.map((dish) => (
-                  <Dish
-                    key={dish.id}
-                    name={dish.name}
-                    category={dish.category}
-                    description={dish.description}
-                    price={dish.price}
-                    image={dish.image}
-                    spicy={dish.spicy}
-                  />
-                ))
-              )}
-            </div>
-          </div>
-        </section>
+        <Menu dishes={dishes} />
 
         <section className="cta-section">
           <div className="container">

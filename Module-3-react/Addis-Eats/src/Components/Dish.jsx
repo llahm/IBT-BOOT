@@ -1,3 +1,4 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
 import Card from "./Card";
 
@@ -10,7 +11,18 @@ function Dish({
   image,
   spicy,
   currency = "ETB",
+  onAdd,
 }) {
+  // Dish owns its own "how many of this have I added" count. The running
+  // order total itself lives higher up (in Menu), so every time someone
+  // taps Add we bump our local count *and* tell the parent via onAdd.
+  const [count, setCount] = useState(0);
+
+  function handleAdd() {
+    setCount((current) => current + 1);
+    onAdd(price);
+  }
+
   return (
     <Card className="food-card">
       <img src={image} alt={name} />
@@ -33,7 +45,12 @@ function Dish({
             {price} {currency}
           </strong>
 
-          <button className="add-btn">+</button>
+          <div className="food-add">
+            {count > 0 && <span className="dish-count">{count}</span>}
+            <button type="button" className="add-btn" onClick={handleAdd}>
+              +
+            </button>
+          </div>
         </div>
       </div>
     </Card>
@@ -48,6 +65,7 @@ Dish.propTypes = {
   image: PropTypes.string,
   spicy: PropTypes.bool,
   currency: PropTypes.string,
+  onAdd: PropTypes.func.isRequired,
 };
 
 export default Dish;
