@@ -1,9 +1,12 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import Card from "./Card";
+import { useCart } from "../context/CartContext";
 
 // currency has a default value so callers don't have to pass it every time
 function Dish({
+  id,
   name,
   price,
   category,
@@ -11,35 +14,44 @@ function Dish({
   image,
   spicy,
   currency = "ETB",
-  onAdd,
 }) {
-  // Dish owns its own "how many of this have I added" count. The running
-  // order total itself lives higher up (in Menu), so every time someone
-  // taps Add we bump our local count *and* tell the parent via onAdd.
+  const { addItem } = useCart();
+
+  // Dish owns its own "how many of this have I added" count, just for
+  // the little badge next to the + button. The cart's real quantity
+  // lives in CartContext, which is what actually survives navigation.
   const [count, setCount] = useState(0);
 
-  function handleAdd() {
+  function handleAdd(event) {
+    // The whole card links to the detail page — stop the click from
+    // also triggering that navigation when someone just wants to add.
+    event.preventDefault();
+    event.stopPropagation();
     setCount((current) => current + 1);
-    onAdd(price);
+    addItem({ id, name, price, image, currency });
   }
 
   return (
     <Card className="food-card">
-      <img src={image} alt={name} />
+      <Link to={`/menu/${id}`} className="food-card-link">
+        <img src={image} alt={name} />
 
-      <div className="food-info">
-        <span className="food-category">{category}</span>
+        <div className="food-info">
+          <span className="food-category">{category}</span>
 
-        <h3>
-          {name}
-          {/* Guard with === true so a non-boolean "spicy" value (e.g. a
-              stray 0 or empty string from bad data) can never sneak a
-              stray value into the DOM the way `spicy && <Badge />` could. */}
-          {spicy === true && <span className="spicy-badge">🌶️ Spicy</span>}
-        </h3>
+          <h3>
+            {name}
+            {/* Guard with === true so a non-boolean "spicy" value (e.g. a
+                stray 0 or empty string from bad data) can never sneak a
+                stray value into the DOM the way `spicy && <Badge />` could. */}
+            {spicy === true && <span className="spicy-badge">🌶️ Spicy</span>}
+          </h3>
 
-        <p>{description}</p>
+          <p>{description}</p>
+        </div>
+      </Link>
 
+      <div className="food-info food-info-footer">
         <div className="food-bottom">
           <strong>
             {price} {currency}
@@ -58,6 +70,7 @@ function Dish({
 }
 
 Dish.propTypes = {
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   category: PropTypes.string,
@@ -65,7 +78,6 @@ Dish.propTypes = {
   image: PropTypes.string,
   spicy: PropTypes.bool,
   currency: PropTypes.string,
-  onAdd: PropTypes.func.isRequired,
 };
 
 export default Dish;

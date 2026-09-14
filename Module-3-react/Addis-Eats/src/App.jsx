@@ -1,90 +1,40 @@
 import "./App.css";
+import { Routes, Route } from "react-router-dom";
 
-import Header from "./Components/Header";
-import Hero from "./Components/Hero";
-import Menu from "./Components/Menu";
-import RestaurantCard from "./Components/RestaurantCard";
-import Cart from "./Components/Cart";
-import Footer from "./Components/Footer";
+import Layout from "./Components/Layout";
+import RequireAuth from "./Components/RequireAuth";
 
+import HomePage from "./pages/HomePage";
+import MenuPage from "./pages/MenuPage";
+import DishPage from "./pages/DishPage";
+import CartPage from "./pages/CartPage";
+import CheckoutPage from "./pages/CheckoutPage";
+import LoginPage from "./pages/LoginPage";
+import NotFound from "./pages/NotFound";
+
+// The whole app's route table, in one place. Every route is nested
+// inside Layout so the header/nav render once and only the matched
+// screen swaps inside its <Outlet />.
 function App() {
-  const restaurants = [];
-
   return (
-    <div className="app">
-      <Header />
-
-      <main>
-        <Hero />
-
-        <section
-          className="restaurants-section"
-          id="restaurants"
-        >
-          <div className="container">
-            <div className="section-heading">
-              <div>
-                <span className="section-label">
-                  TOP PICKS
-                </span>
-
-                <h2>
-                  Popular restaurants
-                </h2>
-              </div>
-
-              <button className="view-all">
-                View all →
-              </button>
-            </div>
-
-            <div className="restaurant-grid">
-              {restaurants.map((restaurant) => (
-                <RestaurantCard
-                  key={restaurant.id}
-                  name={restaurant.name}
-                  category={restaurant.category}
-                  rating={restaurant.rating}
-                  deliveryTime={restaurant.deliveryTime}
-                  image={restaurant.image}
-                />
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <Menu />
-
-        <section className="cta-section">
-          <div className="container">
-            <div className="cta">
-              <div>
-                <span className="section-label">
-                  ADDIS-EATS
-                </span>
-
-                <h2>
-                  Hungry? We've got you covered.
-                </h2>
-
-                <p>
-                  Order your favorite food from the
-                  best restaurants in Addis Ababa.
-                </p>
-              </div>
-
-              <button className="cta-btn">
-                Explore restaurants →
-              </button>
-            </div>
-          </div>
-        </section>
-
-        <Cart />
-      </main>
-
-      <Footer />
-    </div>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomePage />} />
+        <Route path="menu" element={<MenuPage />} />
+        <Route path="menu/:id" element={<DishPage />} />
+        <Route path="cart" element={<CartPage />} />
+        <Route path="login" element={<LoginPage />} />
+        <Route
+          path="checkout"
+          element={
+            <RequireAuth>
+              <CheckoutPage />
+            </RequireAuth>
+          }
+        />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 }
 

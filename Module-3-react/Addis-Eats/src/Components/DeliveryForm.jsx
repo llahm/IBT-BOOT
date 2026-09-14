@@ -16,7 +16,7 @@ const AREAS = [
   "Gulele",
 ];
 
-function DeliveryForm({ orderTotal }) {
+function DeliveryForm({ orderTotal, onOrderPlaced }) {
   // One state object for the whole form, updated by a single handler —
   // rather than a separate useState per field.
   const [formData, setFormData] = useState({
@@ -41,6 +41,7 @@ function DeliveryForm({ orderTotal }) {
     event.preventDefault();
     if (!isFormValid) return;
     setSubmitted(true);
+    onOrderPlaced?.();
   }
 
   if (submitted) {
@@ -125,6 +126,7 @@ function DeliveryForm({ orderTotal }) {
 
 DeliveryForm.propTypes = {
   orderTotal: PropTypes.number.isRequired,
+  onOrderPlaced: PropTypes.func,
 };
 
 export default DeliveryForm;

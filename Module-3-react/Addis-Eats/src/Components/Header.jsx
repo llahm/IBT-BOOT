@@ -1,26 +1,45 @@
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
+
 function Header() {
+  const { count } = useCart();
+  const { isAuthenticated, user, logout } = useAuth();
+  const navigate = useNavigate();
+
+  function handleAuthClick() {
+    if (isAuthenticated) {
+      logout();
+      navigate("/");
+    } else {
+      navigate("/login");
+    }
+  }
+
   return (
     <header className="header">
       <div className="container header-content">
-        <a href="#home" className="logo">
+        <Link to="/" className="logo">
           Addis<span>-eats</span>
-        </a>
+        </Link>
 
         <nav className="nav">
-          <a href="#home">Home</a>
-          <a href="#restaurants">Restaurants</a>
+          <NavLink to="/" end>
+            Home
+          </NavLink>
+          <NavLink to="/menu">Menu</NavLink>
           <a href="#about">About</a>
         </nav>
 
         <div className="header-actions">
-          <button className="login-btn">
-            Log in
+          <button type="button" className="login-btn" onClick={handleAuthClick}>
+            {isAuthenticated ? `Log out (${user.name})` : "Log in"}
           </button>
 
-          <button className="cart-btn">
+          <Link to="/cart" className="cart-btn">
             🛒
-            <span className="cart-count">0</span>
-          </button>
+            <span className="cart-count">{count}</span>
+          </Link>
         </div>
       </div>
     </header>

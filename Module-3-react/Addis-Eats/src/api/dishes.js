@@ -37,3 +37,27 @@ export async function fetchDishes(category, { signal } = {}) {
   if (!category || category === "All") return dishes;
   return dishes.filter((dish) => dish.category === category);
 }
+
+// Fetches a single dish for the /menu/:id detail page. Mirrors
+// fetchDishes above: a mock today, but shaped like a real
+// `/api/dishes/:id` lookup (cancellable, throws on not-found) so
+// swapping in a real endpoint later is a one-file change.
+export async function fetchDishById(id, { signal } = {}) {
+  await delay(MOCK_NETWORK_DELAY_MS, signal);
+
+  const res = await fetch(DISHES_ENDPOINT, { signal });
+
+  if (!res.ok) {
+    throw new Error(`Menu request failed with status ${res.status}`);
+  }
+
+  const data = await res.json();
+  const dishes = data.dishes ?? [];
+  const dish = dishes.find((item) => String(item.id) === String(id));
+
+  if (!dish) {
+    throw new Error(`No dish found with id "${id}"`);
+  }
+
+  return dish;
+}
