@@ -1,23 +1,22 @@
 import PropTypes from "prop-types";
 import Dish from "./Dish";
 
-function DishList({ dishes, category, onAddToOrder }) {
-  const filteredDishes =
-    category === "All"
-      ? dishes
-      : dishes.filter((dish) => dish.category === category);
-
-  if (filteredDishes.length === 0) {
+// By the time DishList gets `dishes`, category filtering has already
+// happened in the fetch (Menu -> fetchDishes) and search filtering has
+// already happened in Menu too — this component just renders the list
+// it's handed, plus the empty state when that list is empty.
+function DishList({ dishes, onAddToOrder }) {
+  if (dishes.length === 0) {
     return (
       <p className="empty-state">
-        No {category} dishes yet — check back soon!
+        No dishes match — try a different search or category.
       </p>
     );
   }
 
   return (
     <div className="food-grid">
-      {filteredDishes.map((dish) => (
+      {dishes.map((dish) => (
         <Dish
           key={dish.id}
           name={dish.name}
@@ -46,7 +45,6 @@ DishList.propTypes = {
       spicy: PropTypes.bool,
     })
   ).isRequired,
-  category: PropTypes.string.isRequired,
   onAddToOrder: PropTypes.func.isRequired,
 };
 

@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import "./App.css";
 
 import Header from "./Components/Header";
@@ -8,25 +7,8 @@ import RestaurantCard from "./Components/RestaurantCard";
 import Cart from "./Components/Cart";
 import Footer from "./Components/Footer";
 
-async function getDishes() {
-  const res = await fetch("/dishList.json");
-  if (!res.ok) {
-    throw new Error(`Failed to load dishes: ${res.status}`);
-  }
-  const data = await res.json();
-  return data.dishes ?? [];
-}
-
 function App() {
   const restaurants = [];
-
-  const [dishes, setDishes] = useState([]);
-
-  useEffect(() => {
-    getDishes()
-      .then(setDishes)
-      .catch((err) => console.error(err));
-  }, []);
 
   return (
     <div className="app">
@@ -71,7 +53,7 @@ function App() {
           </div>
         </section>
 
-        <Menu dishes={dishes} />
+        <Menu />
 
         <section className="cta-section">
           <div className="container">
