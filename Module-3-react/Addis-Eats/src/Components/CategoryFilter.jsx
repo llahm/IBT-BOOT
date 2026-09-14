@@ -1,14 +1,6 @@
-function CategoryFilter() {
-  const categories = [
-    "All",
-    "Ethiopian",
-    "Pizza",
-    "Burger",
-    "Chicken",
-    "Coffee",
-    "Drinks",
-  ];
+import PropTypes from "prop-types";
 
+function CategoryFilter({ categories, selected, onSelect }) {
   return (
     <section className="categories-section">
       <div className="container">
@@ -29,8 +21,9 @@ function CategoryFilter() {
             <button
               key={category}
               className={`category-btn ${
-                category === "All" ? "active" : ""
+                category === selected ? "active" : ""
               }`}
+              onClick={() => onSelect(category)}
             >
               {category}
             </button>
@@ -40,5 +33,11 @@ function CategoryFilter() {
     </section>
   );
 }
+
+CategoryFilter.propTypes = {
+  categories: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selected: PropTypes.string.isRequired,
+  onSelect: PropTypes.func.isRequired,
+};
 
 export default CategoryFilter;

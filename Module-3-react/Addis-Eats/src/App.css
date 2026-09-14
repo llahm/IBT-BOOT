@@ -465,6 +465,26 @@
   gap: 24px;
 }
 
+.spicy-badge {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: #fee2e2;
+  color: #b91c1c;
+  font-size: 0.7rem;
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: #6b7280;
+  font-size: 1rem;
+}
+
 .food-card {
   overflow: hidden;
 

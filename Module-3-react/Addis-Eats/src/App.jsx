@@ -1,24 +1,49 @@
+import { useEffect, useState } from "react";
 import "./App.css";
 
-import Header from "./components/Header";
-import Hero from "./components/Hero";
-import CategoryFilter from "./components/CategoryFilter";
-import RestaurantCard from "./components/RestaurantCard";
-import FoodCard from "./components/FoodCard";
-import Cart from "./components/Cart";
-import Footer from "./components/Footer";
+import Header from "./Components/Header";
+import Hero from "./Components/Hero";
+import CategoryFilter from "./Components/CategoryFilter";
+import RestaurantCard from "./Components/RestaurantCard";
+import Dish from "./Components/Dish";
+import Cart from "./Components/Cart";
+import Footer from "./Components/Footer";
+
+const CATEGORIES = [
+  "All",
+  "Ethiopian",
+  "Pizza",
+  "Burger",
+  "Chicken",
+  "Coffee",
+  "Drinks",
+];
 
 async function getDishes() {
-  const res = await Promise.all(fetch("/DishList.json"));
-  if(!res.ok){
-    
+  const res = await fetch("/dishList.json");
+  if (!res.ok) {
+    throw new Error(`Failed to load dishes: ${res.status}`);
   }
+  const data = await res.json();
+  return data.dishes ?? [];
 }
 
 function App() {
   const restaurants = [];
 
-  const dishes = [];
+  const [dishes, setDishes] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  useEffect(() => {
+    getDishes()
+      .then(setDishes)
+      .catch((err) => console.error(err));
+  }, []);
+
+  const filteredDishes =
+    selectedCategory === "All"
+      ? dishes
+      : dishes.filter((dish) => dish.category === selectedCategory);
 
   return (
     <div className="app">
@@ -27,7 +52,11 @@ function App() {
       <main>
         <Hero />
 
-        <CategoryFilter />
+        <CategoryFilter
+          categories={CATEGORIES}
+          selected={selectedCategory}
+          onSelect={setSelectedCategory}
+        />
 
         <section
           className="restaurants-section"
@@ -84,16 +113,23 @@ function App() {
             </div>
 
             <div className="food-grid">
-              {dishes.map((dish) => (
-                <FoodCard
-                  key={dish.id}
-                  name={dish.name}
-                  category={dish.category}
-                  description={dish.description}
-                  price={dish.price}
-                  image={dish.image}
-                />
-              ))}
+              {filteredDishes.length === 0 ? (
+                <p className="empty-state">
+                  No {selectedCategory} dishes yet — check back soon!
+                </p>
+              ) : (
+                filteredDishes.map((dish) => (
+                  <Dish
+                    key={dish.id}
+                    name={dish.name}
+                    category={dish.category}
+                    description={dish.description}
+                    price={dish.price}
+                    image={dish.image}
+                    spicy={dish.spicy}
+                  />
+                ))
+              )}
             </div>
           </div>
         </section>
