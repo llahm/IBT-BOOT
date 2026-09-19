@@ -1,0 +1,103 @@
+{
+  "events": [
+    {
+      "id": 1,
+      "name": "Fall Hackathon 2026",
+      "category": "Technology",
+      "date": "2026-10-03",
+      "time": "9:00 AM \u2013 9:00 PM",
+      "location": "Engineering Building, Main Hall",
+      "description": "A 12-hour build sprint open to all majors. Form a team or join one on the day \u2014 prizes for the top three projects.",
+      "image": "https://images.unsplash.com/photo-1529465230221-a0d10e46fcbb?auto=format&fit=crop&w=700&q=80&h=420",
+      "hostClub": "Code & Coffee Society"
+    },
+    {
+      "id": 2,
+      "name": "Open Studio Night",
+      "category": "Arts & Culture",
+      "date": "2026-09-25",
+      "time": "6:00 PM \u2013 9:00 PM",
+      "location": "Fine Arts Studio B",
+      "description": "Drop in, grab a canvas or a lump of clay, and make something. All materials provided, no experience needed.",
+      "image": "https://images.unsplash.com/photo-1758522275317-bc285fab87f4?auto=format&fit=crop&w=700&q=80&h=420",
+      "hostClub": "Canvas & Clay Art Collective"
+    },
+    {
+      "id": 3,
+      "name": "Campus 10K Fun Run",
+      "category": "Sports",
+      "date": "2026-10-17",
+      "time": "7:00 AM",
+      "location": "Starts at the Quad",
+      "description": "Our annual timed 10K loop around campus, followed by a pancake breakfast at the finish line.",
+      "image": "https://images.unsplash.com/photo-1714667643277-3fc8e9ff5bea?auto=format&fit=crop&w=700&q=80&h=420",
+      "hostClub": "Campus Runners Club"
+    },
+    {
+      "id": 4,
+      "name": "Regional Debate Invitational",
+      "category": "Academic",
+      "date": "2026-11-08",
+      "time": "10:00 AM \u2013 5:00 PM",
+      "location": "Humanities Hall, Auditorium",
+      "description": "Teams from six regional universities compete. Come watch the finals or sign up to judge a round.",
+      "image": "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&w=700&q=80&h=420",
+      "hostClub": "Debate & Rhetoric Union"
+    },
+    {
+      "id": 5,
+      "name": "Community Garden Clean-Up Day",
+      "category": "Community Service",
+      "date": "2026-10-04",
+      "time": "10:00 AM \u2013 1:00 PM",
+      "location": "Community Garden",
+      "description": "Help prep the garden beds for fall planting. Gloves and tools provided \u2014 bring water and sun protection.",
+      "image": "https://images.unsplash.com/photo-1634151389979-2dea7604b36f?auto=format&fit=crop&w=700&q=80&h=420",
+      "hostClub": "Green Campus Initiative"
+    },
+    {
+      "id": 6,
+      "name": "Open Mic & Acoustic Night",
+      "category": "Music",
+      "date": "2026-09-26",
+      "time": "8:00 PM \u2013 10:30 PM",
+      "location": "Student Union Lounge",
+      "description": "Sign up for a 10-minute slot or just come listen. Coffee and snacks on the house.",
+      "image": "https://images.unsplash.com/photo-1525204016358-717c1c37382f?auto=format&fit=crop&w=700&q=80&h=420",
+      "hostClub": "Acoustic Sessions Music Club"
+    },
+    {
+      "id": 7,
+      "name": "Startup Pitch Night",
+      "category": "Academic",
+      "date": "2026-11-14",
+      "time": "6:00 PM \u2013 8:30 PM",
+      "location": "Business School Atrium",
+      "description": "Five student teams pitch their startup ideas to a panel of local founders and investors.",
+      "image": "https://images.unsplash.com/photo-1599592487441-df20e856f463?auto=format&fit=crop&w=700&q=80&h=420",
+      "hostClub": "Entrepreneurship Network"
+    },
+    {
+      "id": 8,
+      "name": "International Culture Fair",
+      "category": "Community Service",
+      "date": "2026-10-24",
+      "time": "12:00 PM \u2013 4:00 PM",
+      "location": "International Center Courtyard",
+      "description": "Food, music, and performances from over twenty countries represented on campus. Everyone welcome.",
+      "image": "https://images.unsplash.com/photo-1761124739538-587cd3e3f72a?auto=format&fit=crop&w=700&q=80&h=420",
+      "hostClub": "International Students Association"
+    },
+    {
+      "id": 9,
+      "name": "Board Game Marathon",
+      "category": "Technology",
+      "date": "2026-10-11",
+      "time": "1:00 PM \u2013 10:00 PM",
+      "location": "Student Center Game Room",
+      "description": "A full day of tabletop games \u2014 bring a favorite to teach or come learn something new.",
+      "image": "https://images.unsplash.com/photo-1659434567031-a98e1187a9e3?auto=format&fit=crop&w=700&q=80&h=420",
+      "hostClub": "Board Game & Strategy Club"
+    }
+  ]
+}

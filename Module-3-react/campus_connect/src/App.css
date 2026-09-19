@@ -1,0 +1,841 @@
+/* ============ APP SHELL ============ */
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+/* ============ NAVBAR ============ */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 16px 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.logo-mark {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: var(--brand);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 15px;
+}
+
+.logo span {
+  color: var(--brand);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 26px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.nav-links a.active {
+  color: var(--brand);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.theme-toggle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface-alt);
+  font-size: 16px;
+  display: grid;
+  place-items: center;
+}
+
+.favorites-btn {
+  position: relative;
+  border: 1px solid var(--border);
+  background: var(--surface-alt);
+  border-radius: 999px;
+  padding: 8px 16px 8px 14px;
+  font-weight: 600;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text);
+}
+
+.favorites-count {
+  background: var(--accent);
+  color: #fff;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 7px;
+}
+
+.nav-toggle {
+  display: none;
+  border: 1px solid var(--border);
+  background: var(--surface-alt);
+  border-radius: 8px;
+  width: 38px;
+  height: 38px;
+  font-size: 18px;
+}
+
+/* ============ FOOTER ============ */
+
+.footer {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  margin-top: 60px;
+  padding: 36px 0;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.footer-links {
+  display: flex;
+  gap: 22px;
+  font-weight: 600;
+}
+
+/* ============ BUTTONS ============ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 22px;
+  font-weight: 700;
+  font-size: 15px;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--brand);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--brand-dark);
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1.5px solid var(--brand);
+  color: var(--brand);
+}
+
+.btn-outline:hover {
+  background: var(--brand);
+  color: #fff;
+}
+
+.btn-ghost {
+  background: var(--surface-alt);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-sm {
+  padding: 8px 16px;
+  font-size: 13px;
+}
+
+/* ============ HERO ============ */
+
+.hero {
+  padding: 70px 0 60px;
+  background: linear-gradient(
+    180deg,
+    var(--surface-alt) 0%,
+    var(--bg) 100%
+  );
+}
+
+.hero-content {
+  max-width: 640px;
+}
+
+.hero h1 {
+  font-size: 42px;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+.hero h1 span {
+  color: var(--brand);
+}
+
+.hero p {
+  color: var(--text-muted);
+  font-size: 17px;
+  margin-bottom: 28px;
+  line-height: 1.6;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 36px;
+  margin-top: 40px;
+}
+
+.hero-stat strong {
+  display: block;
+  font-size: 26px;
+  color: var(--brand);
+}
+
+.hero-stat span {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* ============ SECTION HEADING ============ */
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 50px 0 24px;
+  gap: 16px;
+}
+
+.section-heading h2 {
+  font-size: 26px;
+}
+
+/* ============ QUICK LINKS (home) ============ */
+
+.quick-links {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin: 50px 0;
+}
+
+.quick-link-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px 18px;
+  text-align: center;
+  font-weight: 700;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.quick-link-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+
+.quick-link-icon {
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+
+/* ============ CARD (generic wrapper) ============ */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  /* Cards sit in a CSS grid row that stretches every item to the same
+     height (grid's default align-items: stretch). Without display:flex
+     here, that extra height just sits as empty space below the content
+     instead of being usable — so a shorter card's footer (View Details /
+     favorite star) ends up floating above a taller neighbor's footer.
+     Flex + the card-body rule below fixes that. */
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow);
+}
+
+/* ============ GRIDS ============ */
+
+.club-grid,
+.event-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  align-items: stretch;
+}
+
+/* ============ CLUB CARD ============ */
+
+/* Was ".club-card > img" (direct-child combinator), but the <img> is
+   actually nested one level deeper inside a <Link> — so this rule
+   never matched anything. With no height constraint applied, each
+   image rendered at its own natural aspect ratio, which is why cards
+   ended up wildly different heights depending on the source photo.
+   A descendant selector (no ">") reaches the nested img correctly. */
+.club-card img,
+.event-card img {
+  display: block;
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+}
+
+.club-card-body,
+.event-card-body {
+  padding: 18px;
+  /* Fills the remaining height in the flex column (see .card above)
+     and pushes each card's footer to the same bottom edge via the
+     margin-top: auto on .club-card-footer/.event-card-footer below,
+     regardless of how long that card's description happens to be. */
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.category-pill {
+  display: inline-block;
+  background: var(--surface-alt);
+  color: var(--brand);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+  /* Prevents a long category name (or a squeezed 3-column layout) from
+     stretching the pill to the card's full width. */
+  align-self: flex-start;
+}
+
+.club-card-body h3,
+.event-card-body h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.club-card-body p,
+.event-card-body p {
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.club-card-footer,
+.event-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* The key rule for equal-looking cards: whatever space is left over
+     in the flex column above gets pushed above the footer, so every
+     card's button/star lines up on the same row no matter how much
+     description text preceded it. */
+  margin-top: auto;
+}
+
+
+.club-members {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.event-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+.event-meta span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.favorite-btn {
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  line-height: 1;
+  color: var(--text-muted);
+}
+
+.favorite-btn.is-favorite {
+  color: var(--accent);
+}
+
+/* ============ FILTER BAR (search + category pills) ============ */
+
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 26px;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 220px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 10px;
+  padding: 11px 16px;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.search-input:focus {
+  outline: 2px solid var(--brand);
+  outline-offset: 1px;
+}
+
+.category-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.category-btn {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.category-btn.active {
+  background: var(--brand);
+  border-color: var(--brand);
+  color: #fff;
+}
+
+.sort-select {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: var(--text);
+}
+
+/* ============ STATUS STATES ============ */
+
+.status-block {
+  text-align: center;
+  padding: 60px 0;
+  color: var(--text-muted);
+}
+
+.status-block.is-error {
+  color: var(--danger);
+}
+
+.status-block .btn {
+  margin-top: 16px;
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 50px 0;
+  color: var(--text-muted);
+}
+
+/* ============ DETAILS PAGES ============ */
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--brand);
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.detail-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 40px;
+  align-items: start;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  margin-bottom: 60px;
+}
+
+.detail-layout img {
+  width: 100%;
+  height: 100%;
+  min-height: 320px;
+  object-fit: cover;
+}
+
+.detail-body {
+  padding: 34px 34px 34px 0;
+}
+
+.detail-body h1 {
+  font-size: 30px;
+  margin: 10px 0 14px;
+}
+
+.detail-body p.description {
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 22px;
+}
+
+.detail-info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding: 16px;
+  background: var(--surface-alt);
+  border-radius: 12px;
+}
+
+.detail-info-list div {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.detail-info-list dt {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 26px;
+}
+
+.tag {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.detail-actions {
+  display: flex;
+  gap: 12px;
+}
+
+/* ============ RESOURCES PAGE ============ */
+
+.resource-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+  margin-bottom: 60px;
+}
+
+.resource-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 26px;
+}
+
+.resource-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.resource-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: var(--surface-alt);
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+}
+
+.resource-card h3 {
+  font-size: 18px;
+}
+
+.resource-list li {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-top: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.resource-list li:first-child {
+  border-top: none;
+}
+
+.resource-list a {
+  color: var(--brand);
+  font-weight: 600;
+}
+
+/* ============ ABOUT PAGE ============ */
+
+.about-hero {
+  padding: 50px 0 20px;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin: 40px 0 60px;
+}
+
+.about-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px;
+}
+
+.about-card h3 {
+  margin-bottom: 8px;
+  font-size: 17px;
+}
+
+.about-card p {
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* ============ CONTACT / FORM (About page) ============ */
+
+.contact-form {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 30px;
+  max-width: 560px;
+  margin-bottom: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.contact-form label {
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  border-radius: 10px;
+  padding: 11px 14px;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.contact-form textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.form-success {
+  background: rgba(28, 138, 90, 0.12);
+  border: 1px solid var(--success);
+  color: var(--success);
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.field-error {
+  color: var(--danger);
+  font-size: 12px;
+  margin-top: -8px;
+}
+
+/* ============ FAVORITES PAGE ============ */
+
+.favorites-section .club-grid,
+.favorites-section .event-grid {
+  margin-bottom: 50px;
+}
+
+/* ============ 404 ============ */
+
+.not-found {
+  text-align: center;
+  padding: 110px 0;
+}
+
+.not-found .code {
+  font-size: 84px;
+  font-weight: 800;
+  color: var(--brand);
+  line-height: 1;
+}
+
+.not-found p {
+  color: var(--text-muted);
+  margin: 14px 0 26px;
+  font-size: 16px;
+}
+
+/* ============ RESPONSIVE ============ */
+
+@media (max-width: 960px) {
+  .club-grid,
+  .event-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .quick-links {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .resource-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-body {
+    padding: 26px;
+  }
+}
+
+@media (max-width: 680px) {
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 5%;
+    gap: 14px;
+    display: none;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .nav-toggle {
+    display: grid;
+    place-items: center;
+  }
+
+  .club-grid,
+  .event-grid,
+  .quick-links,
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    font-size: 32px;
+  }
+
+  .hero-stats {
+    gap: 22px;
+  }
+
+  .section-heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

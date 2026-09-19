@@ -1,0 +1,134 @@
+{
+  "clubs": [
+    {
+      "id": 1,
+      "name": "Code & Coffee Society",
+      "category": "Technology",
+      "description": "A friendly space for students who like building things \u2014 web apps, robots, or anything with a blinking LED.",
+      "image": "https://images.unsplash.com/photo-1529465230221-a0d10e46fcbb?auto=format&fit=crop&w=600&q=80&h=400",
+      "meeting": "Tuesdays, 6:00 PM \u2014 Engineering Building, Room 214",
+      "members": 86,
+      "interests": [
+        "Web Development",
+        "Robotics",
+        "Open Source",
+        "AI"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Canvas & Clay Art Collective",
+      "category": "Arts & Culture",
+      "description": "From life drawing to ceramics, this club is for anyone who wants to make something with their hands.",
+      "image": "https://images.unsplash.com/photo-1758522275317-bc285fab87f4?auto=format&fit=crop&w=600&q=80&h=400",
+      "meeting": "Wednesdays, 5:30 PM \u2014 Fine Arts Studio B",
+      "members": 54,
+      "interests": [
+        "Painting",
+        "Ceramics",
+        "Sketching",
+        "Gallery Nights"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Campus Runners Club",
+      "category": "Sports",
+      "description": "Casual to competitive \u2014 we run together three times a week and train for the annual campus 10K.",
+      "image": "https://images.unsplash.com/photo-1714667643277-3fc8e9ff5bea?auto=format&fit=crop&w=600&q=80&h=400",
+      "meeting": "Mon/Wed/Fri, 6:30 AM \u2014 Meet at the Quad",
+      "members": 112,
+      "interests": [
+        "Running",
+        "5K Training",
+        "Trail Runs",
+        "Fitness"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Debate & Rhetoric Union",
+      "category": "Academic",
+      "description": "Sharpen your argument. We compete in regional debate tournaments and host open-mic argument nights.",
+      "image": "https://images.unsplash.com/photo-1544531586-fde5298cdd40?auto=format&fit=crop&w=600&q=80&h=400",
+      "meeting": "Thursdays, 7:00 PM \u2014 Humanities Hall 110",
+      "members": 41,
+      "interests": [
+        "Public Speaking",
+        "Policy Debate",
+        "Mock Trial"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "Green Campus Initiative",
+      "category": "Community Service",
+      "description": "Student-run sustainability projects: campus composting, a community garden, and clean-up drives.",
+      "image": "https://images.unsplash.com/photo-1634151389979-2dea7604b36f?auto=format&fit=crop&w=600&q=80&h=400",
+      "meeting": "First Saturday of the month, 10:00 AM \u2014 Community Garden",
+      "members": 67,
+      "interests": [
+        "Sustainability",
+        "Gardening",
+        "Volunteering"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Acoustic Sessions Music Club",
+      "category": "Music",
+      "description": "Bring an instrument or just your voice \u2014 we jam every week and host an open mic once a semester.",
+      "image": "https://images.unsplash.com/photo-1525204016358-717c1c37382f?auto=format&fit=crop&w=600&q=80&h=400",
+      "meeting": "Fridays, 8:00 PM \u2014 Student Union Lounge",
+      "members": 73,
+      "interests": [
+        "Guitar",
+        "Vocals",
+        "Songwriting",
+        "Open Mic"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Entrepreneurship Network",
+      "category": "Academic",
+      "description": "A student community for founders and future founders \u2014 pitch practice, workshops, and mentor meetups.",
+      "image": "https://images.unsplash.com/photo-1599592487441-df20e856f463?auto=format&fit=crop&w=600&q=80&h=400",
+      "meeting": "Tuesdays, 5:00 PM \u2014 Business School Atrium",
+      "members": 58,
+      "interests": [
+        "Startups",
+        "Pitching",
+        "Networking"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "International Students Association",
+      "category": "Community Service",
+      "description": "Connecting students from around the world with events, language exchanges, and cultural nights.",
+      "image": "https://images.unsplash.com/photo-1761124739538-587cd3e3f72a?auto=format&fit=crop&w=600&q=80&h=400",
+      "meeting": "Every other Sunday, 4:00 PM \u2014 International Center",
+      "members": 134,
+      "interests": [
+        "Cultural Exchange",
+        "Language Practice",
+        "Food Nights"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Board Game & Strategy Club",
+      "category": "Technology",
+      "description": "Weekly game nights covering everything from classic strategy games to tabletop RPG campaigns.",
+      "image": "https://images.unsplash.com/photo-1659434567031-a98e1187a9e3?auto=format&fit=crop&w=600&q=80&h=400",
+      "meeting": "Saturdays, 2:00 PM \u2014 Student Center Game Room",
+      "members": 49,
+      "interests": [
+        "Board Games",
+        "Tabletop RPGs",
+        "Chess"
+      ]
+    }
+  ]
+}
