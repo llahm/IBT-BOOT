@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { Profiler, useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import CategoryBar from "../Components/CategoryBar";
 import DishList from "../Components/DishList";
+import ErrorBoundary from "../Components/ErrorBoundary";
 import { fetchDishes } from "../api/dishes";
 
 const CATEGORIES = [
@@ -13,6 +14,12 @@ const CATEGORIES = [
   "Coffee",
   "Drinks",
 ];
+
+function logRender(id, phase, actualDuration) {
+  if (import.meta.env.DEV) {
+    console.log(`[profiler] ${id} (${phase}) took ${actualDuration.toFixed(2)}ms`);
+  }
+}
 
 function MenuPage() {
   // The category filter lives in the URL (?category=Pizza) instead of
@@ -163,7 +170,11 @@ function MenuPage() {
             aria-label="Search dishes"
           />
 
-          <DishList dishes={visibleDishes} />
+          <Profiler id="dish-grid" onRender={logRender}>
+            <ErrorBoundary message="This part of the menu hit a snag. The rest of Addis Eats is fine — try reloading it.">
+              <DishList dishes={visibleDishes} />
+            </ErrorBoundary>
+          </Profiler>
         </div>
       </section>
     </>

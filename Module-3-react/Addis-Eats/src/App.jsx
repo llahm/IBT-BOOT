@@ -1,20 +1,21 @@
 import "./App.css";
+import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import Layout from "./Components/Layout";
 import RequireAuth from "./Components/RequireAuth";
+import RouteSkeleton from "./Components/RouteSkeleton";
 
 import HomePage from "./pages/HomePage";
 import MenuPage from "./pages/MenuPage";
 import DishPage from "./pages/DishPage";
 import CartPage from "./pages/CartPage";
-import CheckoutPage from "./pages/CheckoutPage";
 import LoginPage from "./pages/LoginPage";
 import NotFound from "./pages/NotFound";
 
-// The whole app's route table, in one place. Every route is nested
-// inside Layout so the header/nav render once and only the matched
-// screen swaps inside its <Outlet />.
+const CheckoutPage = lazy(() => import("./pages/CheckoutPage"));
+const ReceiptPage = lazy(() => import("./pages/ReceiptPage"));
+
 function App() {
   return (
     <Routes>
@@ -28,7 +29,19 @@ function App() {
           path="checkout"
           element={
             <RequireAuth>
-              <CheckoutPage />
+              <Suspense fallback={<RouteSkeleton />}>
+                <CheckoutPage />
+              </Suspense>
+            </RequireAuth>
+          }
+        />
+        <Route
+          path="checkout/receipt"
+          element={
+            <RequireAuth>
+              <Suspense fallback={<RouteSkeleton />}>
+                <ReceiptPage />
+              </Suspense>
             </RequireAuth>
           }
         />

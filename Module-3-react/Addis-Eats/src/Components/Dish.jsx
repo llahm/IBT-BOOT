@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Card from "./Card";
+import Modal from "./Modal";
 import { useCartStore } from "../store/cartStore";
 
-// currency has a default value so callers don't have to pass it every time
 function Dish({
   id,
   name,
@@ -15,24 +15,21 @@ function Dish({
   spicy,
   currency = "ETB",
 }) {
-  // Narrow selector: this component re-renders only when the addItem
-  // function reference changes (i.e. never, in practice) — not when
-  // items elsewhere in the cart are added, removed, or reordered.
   const addItem = useCartStore((state) => state.addItem);
-
-  // Dish owns its own "how many of this have I added" count, just for
-  // the little badge next to the + button. The cart's real quantity
-  // lives in the Zustand cart store, which is what actually survives
-  // navigation (and, thanks to its persist middleware, a refresh too).
   const [count, setCount] = useState(0);
+  const [showModal, setShowModal] = useState(false);
 
   function handleAdd(event) {
-    // The whole card links to the detail page — stop the click from
-    // also triggering that navigation when someone just wants to add.
     event.preventDefault();
     event.stopPropagation();
     setCount((current) => current + 1);
     addItem({ id, name, price, image, currency });
+  }
+
+  function openQuickView(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    setShowModal(true);
   }
 
   return (
@@ -45,9 +42,6 @@ function Dish({
 
           <h3>
             {name}
-            {/* Guard with === true so a non-boolean "spicy" value (e.g. a
-                stray 0 or empty string from bad data) can never sneak a
-                stray value into the DOM the way `spicy && <Badge />` could. */}
             {spicy === true && <span className="spicy-badge">🌶️ Spicy</span>}
           </h3>
 
@@ -62,6 +56,9 @@ function Dish({
           </strong>
 
           <div className="food-add">
+            <button type="button" className="quickview-btn" onClick={openQuickView}>
+              👁
+            </button>
             {count > 0 && <span className="dish-count">{count}</span>}
             <button type="button" className="add-btn" onClick={handleAdd}>
               +
@@ -69,6 +66,33 @@ function Dish({
           </div>
         </div>
       </div>
+
+      {showModal && (
+        <Modal onClose={() => setShowModal(false)}>
+          <img src={image} alt={name} className="modal-dish-image" />
+          <div className="modal-dish-info">
+            <span className="food-category">{category}</span>
+            <h3>
+              {name}
+              {spicy === true && <span className="spicy-badge">🌶️ Spicy</span>}
+            </h3>
+            <p>{description}</p>
+            <strong>
+              {price} {currency}
+            </strong>
+            <button
+              type="button"
+              className="checkout-btn"
+              onClick={(event) => {
+                handleAdd(event);
+                setShowModal(false);
+              }}
+            >
+              Add to cart
+            </button>
+          </div>
+        </Modal>
+      )}
     </Card>
   );
 }
@@ -84,4 +108,4 @@ Dish.propTypes = {
   currency: PropTypes.string,
 };
 
-export default Dish;
+export default memo(Dish);

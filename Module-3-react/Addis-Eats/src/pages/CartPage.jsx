@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useCartStore } from "../store/cartStore";
+import ErrorBoundary from "../Components/ErrorBoundary";
 
 // Nothing here is fetched or reset on mount — `items` comes straight
 // from the Zustand cart store, which lives outside the router entirely
@@ -40,60 +41,62 @@ function CartPage() {
             </div>
           </div>
         ) : (
-          <div className="cart cart-page">
-            <ul className="cart-items">
-              {items.map((item) => (
-                <li key={item.id} className="cart-item">
-                  <img src={item.image} alt={item.name} />
+          <ErrorBoundary message="Your cart panel hit a snag, but nothing in it was lost — try reloading.">
+            <div className="cart cart-page">
+              <ul className="cart-items">
+                {items.map((item) => (
+                  <li key={item.id} className="cart-item">
+                    <img src={item.image} alt={item.name} />
 
-                  <div className="cart-item-info">
-                    <Link to={`/menu/${item.id}`}>{item.name}</Link>
-                    <span>
-                      {item.price} {item.currency}
-                    </span>
-                  </div>
+                    <div className="cart-item-info">
+                      <Link to={`/menu/${item.id}`}>{item.name}</Link>
+                      <span>
+                        {item.price} {item.currency}
+                      </span>
+                    </div>
 
-                  <div className="cart-item-qty">
+                    <div className="cart-item-qty">
+                      <button
+                        type="button"
+                        onClick={() => updateQty(item.id, item.qty - 1)}
+                        aria-label={`Decrease quantity of ${item.name}`}
+                      >
+                        −
+                      </button>
+                      <span>{item.qty}</span>
+                      <button
+                        type="button"
+                        onClick={() => updateQty(item.id, item.qty + 1)}
+                        aria-label={`Increase quantity of ${item.name}`}
+                      >
+                        +
+                      </button>
+                    </div>
+
                     <button
                       type="button"
-                      onClick={() => updateQty(item.id, item.qty - 1)}
-                      aria-label={`Decrease quantity of ${item.name}`}
+                      className="cart-item-remove"
+                      onClick={() => removeItem(item.id)}
+                      aria-label={`Remove ${item.name} from cart`}
                     >
-                      −
+                      ✕
                     </button>
-                    <span>{item.qty}</span>
-                    <button
-                      type="button"
-                      onClick={() => updateQty(item.id, item.qty + 1)}
-                      aria-label={`Increase quantity of ${item.name}`}
-                    >
-                      +
-                    </button>
-                  </div>
+                  </li>
+                ))}
+              </ul>
 
-                  <button
-                    type="button"
-                    className="cart-item-remove"
-                    onClick={() => removeItem(item.id)}
-                    aria-label={`Remove ${item.name} from cart`}
-                  >
-                    ✕
-                  </button>
-                </li>
-              ))}
-            </ul>
+              <div className="cart-footer">
+                <div className="cart-total">
+                  <span>Total</span>
+                  <strong>{total} ETB</strong>
+                </div>
 
-            <div className="cart-footer">
-              <div className="cart-total">
-                <span>Total</span>
-                <strong>{total} ETB</strong>
+                <Link to="/checkout" className="checkout-btn checkout-link">
+                  Checkout
+                </Link>
               </div>
-
-              <Link to="/checkout" className="checkout-btn checkout-link">
-                Checkout
-              </Link>
             </div>
-          </div>
+          </ErrorBoundary>
         )}
       </div>
     </section>

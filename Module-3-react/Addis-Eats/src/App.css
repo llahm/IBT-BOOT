@@ -516,6 +516,120 @@
   font-weight: 600;
 }
 
+.quickview-btn {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.quickview-btn:hover {
+  background: #f3f4f6;
+}
+
+.error-boundary {
+  padding: 2.5rem 1rem;
+  text-align: center;
+  color: #b91c1c;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 0.75rem;
+}
+
+.error-boundary button {
+  margin-top: 0.75rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid #b91c1c;
+  background: #fff;
+  color: #b91c1c;
+  cursor: pointer;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(17, 24, 39, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  z-index: 100;
+}
+
+.modal {
+  position: relative;
+  max-width: 480px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 1rem;
+  padding: 1.5rem;
+}
+
+.modal:focus {
+  outline: none;
+}
+
+.modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 999px;
+  border: none;
+  background: #f3f4f6;
+  cursor: pointer;
+}
+
+.modal-dish-image {
+  width: 100%;
+  border-radius: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.modal-dish-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.skeleton {
+  padding: 2rem 0;
+}
+
+.skeleton-line {
+  height: 1rem;
+  border-radius: 0.4rem;
+  background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+  margin-bottom: 0.9rem;
+}
+
+.skeleton-title {
+  width: 40%;
+  height: 1.5rem;
+}
+
+.skeleton-line.short {
+  width: 60%;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
 .delivery-section {
   padding: 3rem 0;
 }
@@ -544,17 +658,34 @@
 }
 
 .delivery-form input,
-.delivery-form select {
+.delivery-form select,
+.delivery-form textarea {
   padding: 0.6rem 0.75rem;
   border-radius: 0.5rem;
   border: 1px solid #d1d5db;
   font-size: 0.95rem;
+  font-family: inherit;
+  resize: vertical;
 }
 
 .field-error {
   color: #b91c1c;
   font-size: 0.8rem;
   margin: -0.25rem 0 0;
+}
+
+.form-error {
+  margin: 0 0 0.5rem;
+  padding: 0.6rem 0.75rem;
+  border-radius: 0.5rem;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+}
+
+.delivery-notes {
+  font-size: 0.9rem;
+  color: #4b5563;
+  margin-top: 0.5rem;
 }
 
 .delivery-total {
