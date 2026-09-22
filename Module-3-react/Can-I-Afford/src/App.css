@@ -257,6 +257,24 @@ main {
   font-style: italic;
 }
 
+/* ---------- about page ---------- */
+
+.about-block {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.about-block h3 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+.about-block p {
+  font-size: 0.95rem;
+}
+
 @media (max-width: 560px) {
   .hero h1 {
     font-size: 2rem;

@@ -13,6 +13,7 @@ function Layout() {
             Home
           </NavLink>
           <NavLink to="/compare">Compare</NavLink>
+          <NavLink to="/about">About</NavLink>
         </nav>
       </header>
 
