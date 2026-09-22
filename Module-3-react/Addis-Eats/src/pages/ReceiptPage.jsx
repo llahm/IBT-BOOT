@@ -8,7 +8,7 @@ function ReceiptPage() {
     return <Navigate to="/menu" replace />;
   }
 
-  const { items, total, name, phone, area, notes } = order;
+  const { items, total, name, phone, area } = order;
 
   return (
     <section className="delivery-section">
@@ -32,8 +32,6 @@ function ReceiptPage() {
               </li>
             ))}
           </ul>
-
-          {notes && <p className="delivery-notes">Note: {notes}</p>}
 
           <Link to="/menu" className="view-all">
             Back to menu →
