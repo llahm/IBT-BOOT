@@ -5,7 +5,8 @@ import Dish from "./Dish";
 // happened in the fetch (MenuPage -> fetchDishes) and search filtering
 // has already happened in MenuPage too — this component just renders
 // the list it's handed, plus the empty state when that list is empty.
-// Adding to the cart is handled by each Dish itself via CartContext.
+// Adding to the cart is handled by each Dish itself via the Zustand
+// cart store (see src/store/cartStore.js).
 function DishList({ dishes }) {
   if (dishes.length === 0) {
     return (

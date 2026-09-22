@@ -2,7 +2,7 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Card from "./Card";
-import { useCart } from "../context/CartContext";
+import { useCartStore } from "../store/cartStore";
 
 // currency has a default value so callers don't have to pass it every time
 function Dish({
@@ -15,11 +15,15 @@ function Dish({
   spicy,
   currency = "ETB",
 }) {
-  const { addItem } = useCart();
+  // Narrow selector: this component re-renders only when the addItem
+  // function reference changes (i.e. never, in practice) — not when
+  // items elsewhere in the cart are added, removed, or reordered.
+  const addItem = useCartStore((state) => state.addItem);
 
   // Dish owns its own "how many of this have I added" count, just for
   // the little badge next to the + button. The cart's real quantity
-  // lives in CartContext, which is what actually survives navigation.
+  // lives in the Zustand cart store, which is what actually survives
+  // navigation (and, thanks to its persist middleware, a refresh too).
   const [count, setCount] = useState(0);
 
   function handleAdd(event) {

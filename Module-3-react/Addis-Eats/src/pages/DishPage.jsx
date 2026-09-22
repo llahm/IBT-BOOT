@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { fetchDishById } from "../api/dishes";
-import { useCart } from "../context/CartContext";
+import { useCartStore } from "../store/cartStore";
 
 function DishPage() {
   // Route is "menu/:id" (see App.jsx) — useParams reads whatever
   // segment the person navigated to, e.g. /menu/3 -> { id: "3" }.
   const { id } = useParams();
-  const { addItem } = useCart();
+  // Narrow selector: only the addItem action, so this page doesn't
+  // re-render when items change elsewhere in the cart.
+  const addItem = useCartStore((state) => state.addItem);
 
   const [dish, setDish] = useState(null);
   const [status, setStatus] = useState("loading"); // "loading" | "success" | "error"

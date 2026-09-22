@@ -1,11 +1,18 @@
 import { Link, Navigate } from "react-router-dom";
 import DeliveryForm from "../Components/DeliveryForm";
-import { useCart } from "../context/CartContext";
+import { useCartStore } from "../store/cartStore";
 
 // This page's content only ever renders once RequireAuth (wrapping the
-// /checkout route in App.jsx) has confirmed the person is signed in.
+// /checkout route in App.jsx) has confirmed the person is signed in —
+// that guard is still a Context (see context/AuthContext.jsx), which
+// is exactly the kind of low-frequency, app-wide flag Context suits;
+// the cart's higher-churn state is what moved to Zustand.
 function CheckoutPage() {
-  const { items, total, clearCart } = useCart();
+  const items = useCartStore((state) => state.items);
+  const total = useCartStore((state) =>
+    state.items.reduce((sum, item) => sum + item.qty * item.price, 0)
+  );
+  const clearCart = useCartStore((state) => state.clearCart);
 
   if (items.length === 0) {
     return <Navigate to="/cart" replace />;

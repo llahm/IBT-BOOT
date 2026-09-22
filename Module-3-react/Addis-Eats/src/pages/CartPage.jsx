@@ -1,11 +1,22 @@
 import { Link } from "react-router-dom";
-import { useCart } from "../context/CartContext";
+import { useCartStore } from "../store/cartStore";
 
 // Nothing here is fetched or reset on mount — `items` comes straight
-// from CartContext, which lives above the router (see main.jsx), so
-// whatever was added back on /menu or a /menu/:id page is still here.
+// from the Zustand cart store, which lives outside the router entirely
+// (no provider needed at all), so whatever was added back on /menu or
+// a /menu/:id page is still here — and still here after a refresh,
+// thanks to the store's persist middleware.
 function CartPage() {
-  const { items, total, updateQty, removeItem } = useCart();
+  // Four separate, narrow selectors rather than one destructure off a
+  // single hook. `items` and `total` each only cause a re-render when
+  // their own value actually changes; `updateQty`/`removeItem` are
+  // stable function references that never do.
+  const items = useCartStore((state) => state.items);
+  const total = useCartStore((state) =>
+    state.items.reduce((sum, item) => sum + item.qty * item.price, 0)
+  );
+  const updateQty = useCartStore((state) => state.updateQty);
+  const removeItem = useCartStore((state) => state.removeItem);
 
   return (
     <section className="food-section">

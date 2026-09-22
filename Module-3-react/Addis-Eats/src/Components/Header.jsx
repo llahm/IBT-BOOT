@@ -1,9 +1,16 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { useCart } from "../context/CartContext";
+import { useCartStore } from "../store/cartStore";
 import { useAuth } from "../context/AuthContext";
 
 function Header() {
-  const { count } = useCart();
+  // Narrow selector: computed inline from `items` each time the store
+  // changes, but Zustand compares the *returned* number with Object.is,
+  // so Header only actually re-renders when the count itself changes —
+  // not on every cart update (e.g. a quantity edit that leaves the
+  // total item count the same won't re-render this component).
+  const count = useCartStore((state) =>
+    state.items.reduce((sum, item) => sum + item.qty, 0)
+  );
   const { isAuthenticated, user, logout } = useAuth();
   const navigate = useNavigate();
 
