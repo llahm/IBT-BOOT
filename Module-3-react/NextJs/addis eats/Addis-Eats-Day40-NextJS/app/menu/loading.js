@@ -1,0 +1,3 @@
+export default function Loading() {
+  return <section className="menu-section" aria-live="polite" aria-busy="true"><div className="menu-toolbar"><div><span className="eyebrow">JUST A MOMENT</span><h2>Getting the good stuff ready…</h2><p>Loading the menu for you.</p></div></div><div className="dish-grid">{[1, 2, 3].map((item) => <div className="skeleton-card" key={item}><div className="skeleton skeleton-image" /><div className="skeleton-body"><div className="skeleton skeleton-line short" /><div className="skeleton skeleton-line" /><div className="skeleton skeleton-line medium" /></div></div>)}</div></section>;
+}
